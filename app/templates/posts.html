@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+<div class="row">
+    
+    <div class="col-lg-4">
+        <ul class="list-group  text-white" style = "margin-top: 10px; margin-bottom: 10px; margin-left:5% ; margin-right:5% ">
+            {% for id,channel in channel_dict.items() %}
+                {% if id == cur_channel %}
+                    <li class="text-white list-group-item bg-dark"> <a href="{{ url_for('show_post',channel_id = id)}}" style = "text-decoration: none; " class="text-white"> {{ channel }} </a> </li>
+                {% else %}
+                    <li class="list-group-item"> <a href="{{ url_for('show_post',channel_id = id)}}" style = "text-decoration: none" class="link-secondary"> {{ channel }} </a> </li>
+                {% endif %}
+            {% endfor %} 
+        </ul>
+
+    </div>
+    <div class="col-lg-8">
+        <div  style="margin-top: 10px; margin-bottom: 10px;margin-right:5%; margin-left:5%" > <p class="card-text"> <i class="fa fa-key" aria-hidden="true"></i> Channel ID: {{ cur_channel }}</p> </div>
+        <div class="card text-white bg-secondary mb-3 justify-content-center" style="margin-top: 10px; margin-bottom: 10px;margin-right:5%; margin-left:5%">
+            <div class="card-header">Thông báo</div>
+            <div class="card-body">
+              <p class="card-text">Hiện tại chưa có thông báo.</p>
+            </div>
+        </div>
+        <br>
+        <div style="margin-top: 10px; margin-bottom: 10px;margin-right:5%; margin-left:5%">
+            <button type="button"  onclick= "location.href = '{{ url_for('show_post',channel_id = cur_channel) }}'" class="btn btn-outline-primary fw-bold ">Toàn bộ</button>
+            <button type="button"  onclick= "location.href = '{{ url_for('show_img_vd',channel_id = cur_channel) }}'" class="btn btn-outline-primary" >Ảnh và Video</button>
+            <button type="button"  onclick= "location.href = '{{ url_for('show_document',channel_id = cur_channel) }}'" class="btn btn-outline-primary">Tài liệu</button>
+        </div>
+        {% for post in posts %}
+            <div class="card justify-content-center" style = "padding-left: 10px; padding-right: 10px; margin-top: 10px; margin-bottom: 10px;margin-right:5%; margin-left:5%" >
+                
+                <div class="card-body">
+                    <p class="card-text">{{ post.description }}</p>
+                    <p class="card-text"><small class="text-muted"><i class="fa fa-user-o" aria-hidden="true"></i> Được gửi bởi {{ post.username }} </small></p>
+                    <p class="card-text"><small class="text-muted"><i class="fa fa-clock-o" aria-hidden="true"></i> Vào lúc {{ post.created_at.strftime("%d/%m/%Y, %H:%M:%S") }} </small></p>
+                </div>
+
+                    <div style = "margin-bottom:10px; margin-left:10px; margin-right:10px;">
+                        <div class = "wrapper">
+                        {% for link in post.attachments.strip("'']['").split("', '") %}
+                            {% if link.lower().endswith(('.png', '.jpg', '.jpeg','.webp','.gif')) and link%}
+                                <div class="col">
+                                <a href = "{{ link }}" data-toggle="lightbox">
+                                    <img src="{{ link }} " style ="object-fit : scale-down; height:350px; margin-bottom:10px" class="card-img-bottom img-fluid" >
+                                </a>
+                                </div>
+                            {% elif  link.lower().endswith(('.mp4','.webm' ,'.mkv', '.mov')) %}
+                                <div class="col">
+                                    <video controls height="350px" class="card-img-bottom" >
+                                        <source src = "{{ link }}" type = ""{{ "video/" + link.lower().split(".")[-1] }}"" >
+                                    </video>
+                                </div>
+                            {% endif %}
+
+                        {% endfor %}
+                        </div>
+                        {% for link in post.attachments.strip("'']['").split("', '") %}
+                        <ul class="list-group  text-white" >
+                            {% if not link.lower().endswith(('.png', '.jpg', '.jpeg','.webm','.webp','.gif','.mp4','.webm' ,'.mkv', '.mov')) and link %}
+                                <button class="btn border-dark rounded"  onclick= "location.href = '{{ link }}'" style="width:100%; margin-bottom:5px"><i class="fa fa-download"></i>  {{ link.split("/")[-1] }}  </button>
+                            {% endif %}
+                        </ul>
+                        {% endfor %}
+                        <div style = "margin-top:10px;">
+                        {% if post.links is not none and post.links != "[]"  %}
+                            <p class="card-text" style = "margin-left:10px;"><small class="text-muted"><i class="fa fa-external-link" aria-hidden="true"></i> Link trong post </small></p>
+                            {% for link in post.links.strip("'']['").split(" ") %}
+                                <ul class="list-group  text-white" >
+                                    {% if link %}
+                                        <button class="btn border-dark rounded"  onclick=" window.open('{{ link }}', '_blank'); return false;" style="width:100%; margin-bottom:5px">  {{ link }}  </button>
+                                    {% endif %}
+                                </ul>
+                            {% endfor %}
+                        {% endif %}
+                        </div>
+                </div>
+              
+
+            </div>
+        {% endfor %}
+
+    </div>
+</div>
+
+{% endblock %}

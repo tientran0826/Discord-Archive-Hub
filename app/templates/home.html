@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <h4 class="text-center">Channels hiện có</h4>
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Tên Channel</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Add more rows here as needed -->
+            {% for channel_id,channel_name in channel_dict.items() %}
+                <tr>
+                    <td class="text-center align-middle" >{{ channel_id }}</td>
+                    <td class="text-center align-middle" ><a href="{{ url_for('show_post',channel_id = channel_id)}}" style = "text-decoration: none; "> {{ channel_name }} </a></td>
+                </tr>
+
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+
+
+{% endblock %}

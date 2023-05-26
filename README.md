@@ -5,6 +5,6 @@ The Discord Archive Hub is utilized to create channel threads on a dedicated web
 
 ## Live Demo
 Live demo deploy with AWS ECS and AWS RDS </br> <br>
-[Check here](http://ec2-3-237-253-23.compute-1.amazonaws.com/)
+[Check here]: http://ec2-3-237-253-23.compute-1.amazonaws.com/
 
 

@@ -36,7 +36,8 @@ class Post(db.Model):
     username = db.Column(db.String(100), nullable=False)
     attachments = db.Column(db.String(2000), nullable=True)
     links = db.Column(db.String(2000), nullable=True)
-    created_at = db.Column(db.DateTime, default=datetime.now(tz=IST))
+    #tz=IST
+    created_at = db.Column(db.DateTime, default=datetime.now())
 
 class User(UserMixin,db.Model):
     id = db.Column(db.Integer, primary_key=True)

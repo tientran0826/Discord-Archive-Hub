@@ -21,9 +21,21 @@ Config the token in **.env** file.
 DISCORD_TOKEN=YOUR_TOKEN_HERE</pre>
 ## Bot Commands 
   Default prefix: **=**
-  + createChannel + (Channel_name) : Create a thread on website
-  + post + (id_channel) + (content): Send content to the channel      
+  + createChannel + (Channel_name) : Create a thread on website <br><br>
+  ![img1](https://github.com/tientran0826/Discord-Archive-Hub/blob/main/images/create_channel_1.png?raw=true) <br><br>
+  ![img2](https://github.com/tientran0826/Discord-Archive-Hub/blob/main/images/create_channel2.png?raw=true) <br><br>
+  + post + (id_channel) + (content): Send content to the channel <br><br>
+  ![img3](https://github.com/tientran0826/Discord-Archive-Hub/blob/main/images/post_1.png?raw=true) <br><br>
+  ![img4](https://github.com/tientran0826/Discord-Archive-Hub/blob/main/images/post_2.png?raw=true) <br><br>
+  ![img5](https://github.com/tientran0826/Discord-Archive-Hub/blob/main/images/post_3.png?raw=true) <br><br>
   + setprefix + (new_prefix): Change prefix to new prefix
 
-## Demo
+## Admin Panel
+Your admin panel (using to control the records) <br><br>
+![img6](https://github.com/tientran0826/Discord-Archive-Hub/blob/main/images/panel.png?raw=true) <br><br>
+
+<pre>yourdomain/panel </pre>
+Default admin account
+<pre>username: admin, password: admin </pre>
+![img7](https://github.com/tientran0826/Discord-Archive-Hub/blob/main/images/panel_1.png?raw=true) <br><br>
 
